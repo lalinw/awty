@@ -24,7 +24,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         //String phoneStyled = "(" + phone.substring(0, 3) + ") " + phone.substring(3, 6) + "-" + phone.substring(6);
         //String phn_msg = phoneStyled + ": " + msg;
-        Toast.makeText(context, phone + msg, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, phone + msg, Toast.LENGTH_SHORT).show();
 
         Intent smsIntent = new Intent(context, AlarmReceiver.class);
         PendingIntent pi = PendingIntent.getActivity(context, 0, smsIntent,0);
