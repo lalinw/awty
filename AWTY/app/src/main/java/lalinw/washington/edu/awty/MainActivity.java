@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 String frq_str = et_frq.getText().toString();
                 int frq = Integer.parseInt(frq_str);
 
-                if (msg.length() > 0 && phn.length() > 0 && frq > 0) {
+                if (msg.length() > 0 && phn.length() > 9 && frq > 0) {
                     if (start) {
                         //alarm manager is running, stop the service
                         start = false;
