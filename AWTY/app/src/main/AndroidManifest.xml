@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="lalinw.washington.edu.awty">
     <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="19"/>
+        android:minSdkVersion="15"
+        android:targetSdkVersion="25"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.SEND_SMS"/>
 

@@ -6,13 +6,17 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.os.Build;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -46,9 +50,18 @@ public class MainActivity extends AppCompatActivity {
         final EditText et_phn = (EditText) findViewById(R.id.phone);
         final EditText et_frq = (EditText) findViewById(R.id.time);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (MainActivity.this.checkSelfPermission(Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+                MainActivity.this.requestPermissions(new String[] {
+                        Manifest.permission.SEND_SMS
+                }, 1);
+            }
+        }
+
         stst.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 /* Retrieve a PendingIntent that will perform a broadcast */
+
                 alarmIntent = new Intent(getApplicationContext(), AlarmReceiver.class);
                 pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -68,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
                         //starts the alarm manager
                         alarmIntent.putExtra("phone", phn);
                         alarmIntent.putExtra("message", msg);
+
                         pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
                         start = true;
                         stst.setText("Stop");
